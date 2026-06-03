@@ -1,0 +1,1354 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OptiLife - Optimize Your Body, Wealth, and Mind</title>
+    <!-- Fonts: Outfit (Display) and Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <!-- Tailwind v4 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Lucide Icons for high-fidelity vector icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Theme and style configurations -->
+    <style type="text/tailwindcss">
+      @theme {
+        --font-sans: "Inter", sans-serif;
+        --font-display: "Outfit", sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
+        --color-teal-primary: #0D9488;
+        --color-teal-dark: #0F766E;
+        --color-teal-light: #CCFBF1;
+        --color-coral: #F87171;
+        --color-slate-dark: #1E293B;
+        --color-off-white: #F9FAFB;
+      }
+      
+      /* Webkit scrollbar customized for smooth carousel experience */
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scrollbar {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
+    </style>
+  </head>
+  <body class="bg-off-white text-slate-dark font-sans antialiased min-h-screen flex flex-col selection:bg-teal-light selection:text-teal-dark">
+
+    <!-- STICKY HEADER NAVIGATION BAR -->
+    <header id="app-header" class="sticky top-0 bg-white/95 backdrop-blur-md border-b border-gray-100 z-40 transition-shadow">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          
+          <!-- Logo -->
+          <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('health')">
+            <div class="bg-teal-primary p-2 rounded-xl text-white shadow-sm flex items-center justify-center">
+              <i data-lucide="leaf" class="w-5 h-5"></i>
+            </div>
+            <span class="font-display font-bold text-xl tracking-tight text-slate-dark">
+              Opti<span class="text-teal-primary">Life</span>
+            </span>
+          </div>
+
+          <!-- Desktop Navigation Tabs -->
+          <nav class="hidden md:flex space-x-1">
+            <button id="nav-tab-health" onclick="navigateTo('health')" class="px-4 py-2 hover:bg-gray-50 text-teal-primary font-bold border-b-2 border-teal-primary rounded-t-lg transition-all duration-200">
+              Health & Wellness
+            </button>
+            <button id="nav-tab-finance" onclick="navigateTo('finance')" class="px-4 py-2 text-gray-500 font-medium hover:text-slate-dark hover:bg-gray-50 border-b-2 border-transparent rounded-t-lg transition-all duration-200">
+              Finance
+            </button>
+            <button id="nav-tab-family" onclick="navigateTo('family')" class="px-4 py-2 text-gray-500 font-medium hover:text-slate-dark hover:bg-gray-50 border-b-2 border-transparent rounded-t-lg transition-all duration-200">
+              Family
+            </button>
+          </nav>
+
+          <!-- Right Action: Global Habits Check mini counter -->
+          <div class="hidden sm:flex items-center gap-3">
+            <div id="global-h-counter" class="bg-teal-light/70 border border-teal-light rounded-full py-1 px-3 text-teal-dark text-xs font-semibold flex items-center gap-2">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-primary opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-teal-primary"></span>
+              </span>
+              Habits today: <span id="global-counter-num">1</span>/4
+            </div>
+          </div>
+
+          <!-- Mobile Hamburger Toggle -->
+          <div class="md:hidden">
+            <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2 text-gray-500 hover:text-slate-dark focus:outline-none transition-colors">
+              <i data-lucide="menu" id="menu-icon-burger" class="w-6 h-6"></i>
+              <i data-lucide="x" id="menu-icon-close" class="w-6 h-6 hidden"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100 px-4 pt-2 pb-4 space-y-1">
+        <button onclick="navigateTo('health'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-lg text-teal-primary font-bold bg-teal-light/20">
+          Health & Wellness
+        </button>
+        <button onclick="navigateTo('finance'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-slate-dark">
+          Finance
+        </button>
+        <button onclick="navigateTo('family'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-slate-dark">
+          Family
+        </button>
+        <div class="border-t border-gray-100 my-2 pt-2">
+          <div class="px-3 py-1.5 text-xs text-gray-500">
+            Current Session Analytics Activator
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-grow">
+      
+      <!-- ============================================== -->
+      <!-- PAGE 1: HEALTH & WELLNESS                      -->
+      <!-- ============================================== -->
+      <div id="view-health" class="view-section active w-full opacity-100 transition-opacity duration-300">
+        <!-- Hero Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <div class="lg:col-span-7 space-y-6">
+              <span class="inline-block bg-teal-light text-teal-dark px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+                Lifestyle & Longevity
+              </span>
+              <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-slate-dark leading-tight tracking-tight">
+                Optimize Your <br />
+                <span class="text-teal-primary text-transparent bg-clip-text bg-gradient-to-r from-teal-primary to-teal-dark">Body and Mind</span>
+              </h1>
+              <p class="text-gray-600 sm:text-lg max-w-xl leading-relaxed">
+                Discover evidence-based strategies, circadian optimization loops, and mindful eating habits that yield lasting, high-performance daily transformations.
+              </p>
+              <div class="pt-3">
+                <button onclick="smoothScrollTo('health-grid')" class="bg-teal-primary text-white py-3 px-6 rounded-xl font-semibold shadow-md shadow-teal-primary/10 hover:bg-teal-dark hover:scale-[1.02] active:scale-[0.98] transition-all duration-200">
+                  Explore Health Articles
+                </button>
+              </div>
+            </div>
+
+            <div class="lg:col-span-5 relative">
+              <div class="relative bg-white rounded-3xl p-4 shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden group">
+                <div class="relative h-64 sm:h-80 w-full overflow-hidden rounded-2xl bg-gray-50 flex items-center justify-center">
+                  <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80" alt="Mindfulness Meditation Zen" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                  <!-- Floating Accent widget inside graphic -->
+                  <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur shadow-lg rounded-xl p-3 flex items-center gap-3 border border-white/50">
+                    <div class="bg-coral p-2 rounded-lg text-white">
+                      <i data-lucide="shield-check" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                      <h4 class="text-xs font-bold text-slate-dark">Holistic Habit Loop active</h4>
+                      <p class="text-[10px] text-gray-500">Curated by our panel of certified medical advisory boards.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Dynamic Page 1 Split layout: Daily Habit Tracker & Article Content Grid -->
+        <section class="bg-white border-y border-gray-100 py-12 md:py-16">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+              
+              <!-- Left 4 Columns: Habit Tracker widget -->
+              <div class="lg:col-span-4 lg:border-r lg:border-gray-100 lg:pr-8">
+                <div class="bg-[#F8FAFC] rounded-2xl p-6 border border-gray-100 shadow-sm relative overflow-hidden">
+                  <h2 class="font-display font-bold text-2xl text-slate-dark flex items-center gap-3">
+                    <i data-lucide="check-square" class="text-teal-primary w-6 h-6"></i>
+                    Daily Habits
+                  </h2>
+                  <p class="text-gray-500 text-sm mt-1 mb-6">
+                    Check off habits to track your daily alignment. Consistent tasks compound over time.
+                  </p>
+
+                  <!-- Dynamic progress circle metric -->
+                  <div class="bg-white rounded-xl p-4 border border-gray-50 shadow-sm flex items-center gap-4 mb-6">
+                    <div class="relative w-16 h-16 shrink-0 flex items-center justify-center">
+                      <svg class="transform -rotate-90 w-full h-full" viewBox="0 0 36 36">
+                        <circle cx="18" cy="18" r="16" fill="none" stroke="#E2E8F0" stroke-width="3"></circle>
+                        <circle id="habit-svg-circle" cx="18" cy="18" r="16" fill="none" stroke="#0D9488" stroke-width="3" stroke-dasharray="100" stroke-dashoffset="100" class="transition-all duration-300"></circle>
+                      </svg>
+                      <span id="tracker-percentage" class="absolute font-display font-extrabold text-sm text-teal-dark">0%</span>
+                    </div>
+                    <div>
+                      <h4 id="tracker-headline-msg" class="text-xs font-bold text-slate-dark">Let's coordinate progress!</h4>
+                      <p class="text-[11px] text-gray-500 mt-0.5">Toggle checkboxes to see dynamic compound growth ratios.</p>
+                    </div>
+                  </div>
+
+                  <!-- Habit Options checklist -->
+                  <div class="space-y-3" id="habit-checkboxes-container">
+                    <label class="flex items-start gap-3 p-3 bg-white hover:bg-teal-light/10 border border-gray-100 rounded-xl cursor-pointer transition-all">
+                      <input type="checkbox" onchange="recalculateHabits()" data-index="0" class="mt-1 h-4 w-4 text-teal-primary border-gray-300 rounded focus:ring-teal-primary" />
+                      <div class="flex-grow">
+                        <h4 class="text-sm font-bold text-slate-dark">Hydrate Consistently</h4>
+                        <p class="text-xs text-gray-500">Drink at least 3 liters of filtered mineral water.</p>
+                      </div>
+                      <span class="text-blue-400 bg-blue-50 p-1.5 rounded-lg"><i data-lucide="droplet" class="w-4 h-4"></i></span>
+                    </label>
+
+                    <label class="flex items-start gap-3 p-3 bg-white hover:bg-teal-light/10 border border-gray-100 rounded-xl cursor-pointer transition-all">
+                      <input type="checkbox" onchange="recalculateHabits()" data-index="1" class="mt-1 h-4 w-4 text-teal-primary border-gray-300 rounded focus:ring-teal-primary" />
+                      <div class="flex-grow">
+                        <h4 class="text-sm font-bold text-slate-dark">Step Goal Fulfillment</h4>
+                        <p class="text-xs text-gray-500">Log 10,000 steps to support basic circulatory health.</p>
+                      </div>
+                      <span class="text-amber-500 bg-amber-50 p-1.5 rounded-lg"><i data-lucide="activity" class="w-4 h-4"></i></span>
+                    </label>
+
+                    <label class="flex items-start gap-3 p-3 bg-white hover:bg-teal-light/10 border border-gray-100 rounded-xl cursor-pointer transition-all">
+                      <input type="checkbox" onchange="recalculateHabits()" data-index="2" class="mt-1 h-4 w-4 text-teal-primary border-gray-300 rounded focus:ring-teal-primary" />
+                      <div class="flex-grow">
+                        <h4 class="text-sm font-bold text-slate-dark">Daily Centering Practice</h4>
+                        <p class="text-xs text-gray-500">Practice 15 minutes of uninterrupted breathwork.</p>
+                      </div>
+                      <span class="text-purple-500 bg-purple-50 p-1.5 rounded-lg"><i data-lucide="wind" class="w-4 h-4"></i></span>
+                    </label>
+
+                    <label class="flex items-start gap-3 p-3 bg-white hover:bg-teal-light/10 border border-gray-100 rounded-xl cursor-pointer transition-all">
+                      <input type="checkbox" onchange="recalculateHabits()" data-index="3" class="mt-1 h-4 w-4 text-teal-primary border-gray-300 rounded focus:ring-teal-primary" />
+                      <div class="flex-grow">
+                        <h4 class="text-sm font-bold text-slate-dark">Restorative Sleep Optimization</h4>
+                        <p class="text-xs text-gray-500">Achieve 8 hours of sleep in a cool, dark room.</p>
+                      </div>
+                      <span class="text-indigo-500 bg-indigo-50 p-1.5 rounded-lg"><i data-lucide="sunset" class="w-4 h-4"></i></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right 8 Columns: Article Grid -->
+              <div class="lg:col-span-8 space-y-6" id="health-grid">
+                <div class="flex justify-between items-center border-b border-gray-100 pb-3">
+                  <h3 class="font-display font-bold text-2xl text-slate-dark">Featured Wellness Science</h3>
+                  <span class="text-xs text-gray-500 font-semibold tracking-wider">3 HIGH-FIDELITY ESSAYS</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <!-- Article Cards generated by Javascript on DOM Load for deep validation and high fidelity -->
+                  <div id="health-posts-target-grid" class="contents">
+                    <!-- Javascript injection target -->
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- PAGE 2: FINANCE                                -->
+      <!-- ============================================== -->
+      <div id="view-finance" class="view-section hidden w-full opacity-0 transition-opacity duration-300">
+        <!-- Hero Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16">
+          <div class="space-y-4 max-w-3xl">
+            <span class="inline-block bg-teal-light text-teal-dark px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+              Asset Preservation & Growth
+            </span>
+            <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-slate-dark leading-tight tracking-tight">
+              Master Your <span class="text-teal-primary text-transparent bg-clip-text bg-gradient-to-r from-teal-primary to-teal-dark">Wealth & Future</span>
+            </h1>
+            <p class="text-gray-600 sm:text-lg leading-relaxed max-w-2xl">
+              Gain access to modern investing workflows. Understand passive indexing, tax-shelter optimizations, and budget strategies configured with complete mathematical clarity.
+            </p>
+          </div>
+        </section>
+
+        <!-- Asymmetric 70/30 Split Grid Content Layout -->
+        <section class="bg-white border-y border-gray-100 py-12 md:py-16">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+              
+              <!-- 70% Column (Left side / list of articles) -->
+              <div class="lg:col-span-8 space-y-6">
+                <div class="flex justify-between items-center border-b border-gray-100 pb-3">
+                  <h3 class="font-display font-bold text-2xl text-slate-dark">Personal Finance Frameworks</h3>
+                  <span class="text-xs text-on-surface-variant font-semibold bg-gray-50 border border-gray-200/50 py-1 px-3 rounded-full">Passive Investing focus</span>
+                </div>
+
+                <div id="finance-posts-target-list" class="space-y-6">
+                  <!-- Javascript injection target -->
+                </div>
+              </div>
+
+              <!-- 30% Column (Right sidebar / Widget Savings Calculator) -->
+              <div class="lg:col-span-4">
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-lg shadow-gray-100/70 sticky top-[100px] space-y-6">
+                  <div class="flex items-center gap-3">
+                    <div class="bg-teal-light p-2 rounded-xl text-teal-primary">
+                      <i data-lucide="calculator" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-slate-dark">Goal Calculator</h3>
+                  </div>
+                  <p class="text-xs text-gray-500 mt-1">
+                    Calculate exactly how many months of compounding APY it will take to achieve your milestone goal with premium math optimization.
+                  </p>
+
+                  <!-- Metric Result Card -->
+                  <div class="bg-teal-primary text-white rounded-xl p-4 shadow-sm text-center relative overflow-hidden">
+                    <p class="text-[10px] text-teal-light font-semibold uppercase tracking-wider">Estimated Timeline</p>
+                    <h4 id="calc-duration-result" class="font-display font-extrabold text-3xl mt-1 tracking-tight">-- Months</h4>
+                    <p id="calc-interest-earned" class="text-xs text-teal-light/90 mt-1">Includes estimated dynamic interest</p>
+                    <!-- Background SVG design flourish -->
+                    <div class="absolute -right-8 -bottom-8 text-teal-dark/10 opacity-30 select-none">
+                      <i data-lucide="trending-up" class="w-24 h-24"></i>
+                    </div>
+                  </div>
+
+                  <!-- Calculator Interactive Inputs -->
+                  <div class="space-y-4">
+                    <!-- Target input -->
+                    <div>
+                      <label class="block text-xs font-bold text-slate-dark uppercase mb-1" for="calc-target">
+                        Target Savings Goal ($)
+                      </label>
+                      <input type="number" id="calc-target" value="10000" min="1000" max="50000" step="100" class="w-full bg-gray-50 border border-gray-200 rounded-xl py-2 px-3 text-sm font-semibold focus:outline-none focus:ring-1 focus:ring-teal-primary focus:border-teal-primary transition-all text-slate-dark" />
+                      <p class="text-[10px] text-gray-400 mt-1">Accepts ranges between $1,000 and $50,000</p>
+                    </div>
+
+                    <!-- Contribution range slider -->
+                    <div>
+                      <div class="flex justify-between items-center mb-1">
+                        <label class="text-xs font-bold text-slate-dark uppercase" for="calc-contribution">
+                          Monthly Contribution
+                        </label>
+                        <span id="slider-contrib-label" class="text-sm font-extrabold text-teal-primary">$500/mo</span>
+                      </div>
+                      <input type="range" id="calc-contribution" min="10" max="2000" step="10" value="500" class="w-full accent-teal-primary cursor-pointer" />
+                      <div class="flex justify-between text-[10px] text-gray-400 mt-1">
+                        <span>$10</span>
+                        <span>$1,000</span>
+                        <span>$2,000</span>
+                      </div>
+                    </div>
+
+                    <!-- Optional interest rate slider -->
+                    <div>
+                      <div class="flex justify-between items-center mb-1">
+                        <label class="text-xs font-bold text-slate-dark uppercase" for="calc-rate">
+                          Annual Yield APY (%)
+                        </label>
+                        <span id="slider-rate-label" class="text-sm font-extrabold text-teal-primary">4.5%</span>
+                      </div>
+                      <input type="range" id="calc-rate" min="0" max="12" step="0.25" value="4.5" class="w-full accent-teal-primary cursor-pointer" />
+                      <div class="flex justify-between text-[10px] text-gray-400 mt-1">
+                        <span>0% (Cash)</span>
+                        <span>4.5% (High Yield)</span>
+                        <span>12% (Market)</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Metric summary panel -->
+                  <div class="bg-gray-50 rounded-xl p-3 border border-gray-100 flex justify-between text-xs text-gray-600">
+                    <div>
+                      <p class="text-[10px] text-gray-400">Total Principal</p>
+                      <p id="summary-principal" class="font-bold text-slate-dark">$0</p>
+                    </div>
+                    <div>
+                      <p class="text-[10px] text-gray-400">Yield Earned</p>
+                      <p id="summary-yield" class="font-bold text-teal-primary">$0</p>
+                    </div>
+                    <div>
+                      <p class="text-[10px] text-gray-400">Total Asset Pool</p>
+                      <p id="summary-total" class="font-bold text-slate-dark">$0</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- PAGE 3: FAMILY                                 -->
+      <!-- ============================================== -->
+      <div id="view-family" class="view-section hidden w-full opacity-0 transition-opacity duration-300">
+        <!-- Hero Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16">
+          <div class="space-y-4 max-w-3xl">
+            <span class="inline-block bg-teal-light text-teal-dark px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+              Nurturing Interpersonal Bonds
+            </span>
+            <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-slate-dark leading-tight tracking-tight">
+              Build <span class="text-teal-primary text-transparent bg-clip-text bg-gradient-to-r from-teal-primary to-teal-dark">Stronger Bonds</span>
+            </h1>
+            <p class="text-gray-600 sm:text-lg leading-relaxed max-w-2xl">
+              Nurture deeper familial connections. Access structured screen-free parenting templates, collaborative activities, and coordinate weekly alignments.
+            </p>
+          </div>
+        </section>
+
+        <!-- Dynamic horizontal activity ideas sliding horizontal carousel -->
+        <section class="bg-white border-t border-gray-100 py-12">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+            <div class="flex justify-between items-end">
+              <div>
+                <h3 class="font-display font-bold text-xl sm:text-2xl text-slate-dark">Weekend Bonding Blueprints</h3>
+                <p class="text-sm text-gray-500 mt-1">Drag or swipe horizontally to discover screen-free structured ideas.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <button onclick="scrollCarousel(-1)" class="p-2 border border-gray-200 hover:border-teal-primary rounded-xl hover:text-teal-primary focus:outline-none transition-all duration-200">
+                  <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                </button>
+                <button onclick="scrollCarousel(1)" class="p-2 border border-gray-200 hover:border-teal-primary rounded-xl hover:text-teal-primary focus:outline-none transition-all duration-200">
+                  <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- CSS Flex Horizontal Carousel -->
+            <div id="activities-carousel" class="flex gap-6 overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-4 select-none">
+              <!-- Cards parsed down into complete detailed structured blueprints -->
+              <div class="flex-none w-80 sm:w-96 snap-start bg-gray-50 rounded-2xl border border-gray-100 p-5 space-y-4 hover:shadow-md transition-shadow relative">
+                <div class="h-44 w-full rounded-xl overflow-hidden bg-gray-100 relative">
+                  <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80" alt="Backyard Camping under stars" class="h-full w-full object-cover" />
+                  <span class="absolute top-3 left-3 bg-teal-primary text-white text-[10px] font-bold py-1 px-2.5 rounded-full uppercase tracking-wider">Outdoor</span>
+                </div>
+                <div class="space-y-2">
+                  <h4 class="font-display font-bold text-lg text-slate-dark">Backyard Starry Camping</h4>
+                  <p class="text-xs text-gray-500 line-clamp-3">
+                    Pitch a sleeping tent within walking range of the household. Features nighttime flashlight reading, planet identification logs, and a morning birdsong checklist.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex-none w-80 sm:w-96 snap-start bg-gray-50 rounded-2xl border border-gray-100 p-5 space-y-4 hover:shadow-md transition-shadow relative">
+                <div class="h-44 w-full rounded-xl overflow-hidden bg-gray-100 relative">
+                  <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=600&q=80" alt="Family baking individual pizzas" class="h-full w-full object-cover" />
+                  <span class="absolute top-3 left-3 bg-red-400 text-white text-[10px] font-bold py-1 px-2.5 rounded-full uppercase tracking-wider">Kitchen</span>
+                </div>
+                <div class="space-y-2">
+                  <h4 class="font-display font-bold text-lg text-slate-dark">Artisanal Pizza Workshop</h4>
+                  <p class="text-xs text-gray-500 line-clamp-3">
+                    Engage in collaborative flour kneading and dough rolling. Create customized ingredient overlays while teaching principles of food styling and nutritional synergy.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex-none w-80 sm:w-96 snap-start bg-gray-50 rounded-2xl border border-gray-100 p-5 space-y-4 hover:shadow-md transition-shadow relative">
+                <div class="h-44 w-full rounded-xl overflow-hidden bg-gray-100 relative">
+                  <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=600&q=80" alt="DIY safe science balloon experiment" class="h-full w-full object-cover" />
+                  <span class="absolute top-3 left-3 bg-purple-400 text-white text-[10px] font-bold py-1 px-2.5 rounded-full uppercase tracking-wider">Learning</span>
+                </div>
+                <div class="space-y-2">
+                  <h4 class="font-display font-bold text-lg text-slate-dark">Kitchen Chemistry Lab</h4>
+                  <p class="text-xs text-gray-500 line-clamp-3">
+                    Produce gas-expanded balloons, density layers, and simple food chromatography inside deep testing glasses. Safe, clean, and intellectually structured tasks.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex-none w-80 sm:w-96 snap-start bg-gray-50 rounded-2xl border border-gray-100 p-5 space-y-4 hover:shadow-md transition-shadow relative">
+                <div class="h-44 w-full rounded-xl overflow-hidden bg-gray-100 relative">
+                  <img src="https://images.unsplash.com/photo-1559027615-cd4428a632a5?auto=format&fit=crop&w=600&q=80" alt="Parent and children picking up litter at local park" class="h-full w-full object-cover" />
+                  <span class="absolute top-3 left-3 bg-amber-400 text-white text-[10px] font-bold py-1 px-2.5 rounded-full uppercase tracking-wider">Charity</span>
+                </div>
+                <div class="space-y-2">
+                  <h4 class="font-display font-bold text-lg text-slate-dark">Park Ecosystem Restoration</h4>
+                  <p class="text-xs text-gray-500 line-clamp-3">
+                    Visit a nearby reservation or shoreline with gloves and sorting bins. Learn environmental preservation firsthand with targeted local wildlife restoration.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Dynamic Page 3 Split layout: Family Calendar & Parenting deep dive articles -->
+        <section class="bg-gray-50 border-t border-gray-100 py-12 md:py-16">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+              
+              <!-- Left 70% Layout: Parent Articles in a dense single-col layout -->
+              <div class="lg:col-span-7 space-y-6">
+                <div class="flex justify-between items-center border-b border-gray-200 pb-3">
+                  <h3 class="font-display font-bold text-2xl text-slate-dark">Parenting Research Feed</h3>
+                  <span class="text-xs bg-white text-gray-500 font-semibold border border-gray-200 py-1 px-3 rounded-full">Focused on Work-Life Balance</span>
+                </div>
+
+                <div id="family-posts-target-list" class="space-y-6">
+                  <!-- Javascript injection target -->
+                </div>
+              </div>
+
+              <!-- Right 30% Layout: Family calendar & Daily event insertion widget -->
+              <div class="lg:col-span-5">
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-md space-y-6">
+                  <div class="flex justify-between items-center">
+                    <h3 class="font-display font-bold text-lg text-slate-dark flex items-center gap-2">
+                      <i data-lucide="calendar-heart" class="text-coral w-5 h-5"></i>
+                      Family Calendar
+                    </h3>
+                    <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Dynamic Agenda</span>
+                  </div>
+
+                  <!-- 7-Day button layout -->
+                  <div id="calendar-days-strip" class="grid grid-cols-7 gap-1 border-b border-gray-100 pb-4">
+                    <!-- Day keys generated by script -->
+                  </div>
+
+                  <!-- Day schedule details panel -->
+                  <div id="calendar-day-agenda-box" class="bg-gray-50 rounded-xl p-4 border border-gray-100 space-y-3">
+                    <!-- Active agenda items loaded dynamically based on clicked day -->
+                  </div>
+
+                  <!-- Add Custom Event interactive form inside calendar card -->
+                  <div class="border-t border-gray-100 pt-4 space-y-3">
+                    <h4 class="text-xs font-bold text-slate-dark uppercase">Insert Custody / Family Event</h4>
+                    
+                    <div class="grid grid-cols-2 gap-2">
+                      <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase mb-0.5" for="event-title">Title</label>
+                        <input type="text" id="event-title" placeholder="e.g. Cooking Session" class="w-full bg-gray-50 border border-gray-200 rounded-lg text-xs py-1.5 px-2.5 font-semibold focus:outline-none focus:ring-1 focus:ring-teal-primary text-slate-dark" />
+                      </div>
+                      <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase mb-0.5" for="event-category">Color Theme</label>
+                        <select id="event-category" class="w-full bg-gray-50 border border-gray-200 rounded-lg text-xs py-1.5 px-2.5 font-semibold focus:outline-none focus:ring-1 focus:ring-teal-primary text-slate-dark">
+                          <option value="teal">Primary Teal</option>
+                          <option value="coral">Soft Coral</option>
+                          <option value="slate">Dark Slate</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                      <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase mb-0.5" for="event-time">Time</label>
+                        <input type="text" id="event-time" placeholder="e.g. 5:00 PM" class="w-full bg-gray-50 border border-gray-200 rounded-lg text-xs py-1.5 px-2.5 font-semibold focus:outline-none focus:ring-1 focus:ring-teal-primary text-slate-dark" />
+                      </div>
+                      <div class="flex items-end">
+                        <button onclick="addFamilyEvent()" class="w-full bg-teal-primary text-white text-xs font-bold py-1.5 px-3 rounded-lg hover:bg-teal-dark active:scale-[0.98] transition-all">
+                          Add to Selected Day
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </main>
+
+    <!-- FULL INTEGRATED FOOTER WITH MOCK NEWSLETTER SIGN-UP -->
+    <footer class="bg-slate-dark text-white border-t border-slate-700/50 pt-16 pb-8 shrink-0">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+        
+        <!-- Left: Branding -->
+        <div class="md:col-span-4 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="bg-teal-primary p-2 rounded-xl text-white">
+              <i data-lucide="leaf" class="w-5 h-5"></i>
+            </div>
+            <span class="font-display font-bold text-xl tracking-tight">
+              Opti<span class="text-teal-primary">Life</span>
+            </span>
+          </div>
+          <p class="text-gray-400 text-sm max-w-sm leading-relaxed">
+            Your single, optimized hub for biological recovery, automated finance compounds, and mindful family environments. Guided by evidence-based medicine and certified planners.
+          </p>
+        </div>
+
+        <!-- Center Links -->
+        <div class="md:col-span-4 grid grid-cols-2 gap-4">
+          <div class="space-y-3">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-teal-primary">Direct Navigation</h4>
+            <div class="flex flex-col gap-2 text-sm text-gray-400">
+              <a href="javascript:void(0)" onclick="navigateTo('health')" class="hover:text-white transition-colors">Health & Longevity</a>
+              <a href="javascript:void(0)" onclick="navigateTo('finance')" class="hover:text-white transition-colors">Finance Calculator</a>
+              <a href="javascript:void(0)" onclick="navigateTo('family')" class="hover:text-white transition-colors">Family Calendar</a>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-teal-primary font-display">Advisory Board</h4>
+            <div class="flex flex-col gap-2 text-sm text-gray-400">
+              <a href="#" class="hover:text-white transition-colors">Privacy Charter</a>
+              <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+              <a href="#" class="hover:text-white transition-colors">Disclaimer Policy</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Real-time Newsroom registration -->
+        <div class="md:col-span-4 space-y-4">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-teal-primary">Newsletter Synthesis</h4>
+          <p class="text-gray-400 text-xs">
+            Subscribe to receive our physical, financial, and sociological digest directly twice weekly. Zero cognitive noise.
+          </p>
+          
+          <!-- Mock newsletter submit with feedback-driven javascript intercept -->
+          <form id="newsletter-form" onsubmit="handleNewsletterSubmit(event)" class="flex gap-2">
+            <input type="email" required id="newsletter-email" placeholder="youremail@example.com" class="bg-white/10 text-white placeholder:text-gray-500 rounded-xl px-3 py-2 text-sm border border-white/15 focus:outline-none focus:ring-1 focus:ring-teal-primary focus:border-teal-primary flex-grow transition-all" />
+            <button type="submit" class="bg-teal-primary text-white text-xs font-bold py-2 px-4 rounded-xl hover:bg-teal-dark active:scale-[0.98] transition-all shrink-0">
+              Subscribe
+            </button>
+          </form>
+          <p class="text-[10px] text-gray-500">Submitting will engage custom native alert animations inside current frame view.</p>
+        </div>
+
+      </div>
+
+      <!-- Copyright signpost -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-700/40 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+        <p>© 2026 OptiLife Science Group Inc. All personal growth state metrics remain stored locally.</p>
+        <p>Engineered via Google Stitch Visual Specification Standards.</p>
+      </div>
+    </footer>
+
+    <!-- INTERACTIVE FLOATING DETAIL ARTICLE MODAL VIEW -->
+    <div id="article-modal" class="hidden fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+      <div class="flex items-end sm:items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        
+        <!-- Modal slide overlay -->
+        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" aria-hidden="true" onclick="toggleArticleModal(false)"></div>
+
+        <!-- Centering trick for alignment -->
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+        <!-- Article layout container -->
+        <div class="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full border border-gray-100">
+          
+          <!-- Header Hero Photo Inside Modal -->
+          <div class="h-64 sm:h-80 w-full relative bg-gray-100">
+            <img id="modal-img" src="" alt="Article Banner" class="h-full w-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent"></div>
+            <!-- Close icon trigger upper right -->
+            <button onclick="toggleArticleModal(false)" class="absolute top-4 right-4 bg-white/20 hover:bg-white/40 backdrop-blur-md text-white rounded-full p-2 transition-colors focus:outline-none">
+              <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Bottom Left overlay text on modal image -->
+            <div class="absolute bottom-6 left-6 right-6 text-white space-y-1">
+              <span id="modal-tag-chip" class="bg-teal-primary text-white text-[10px] font-bold py-1 px-2.5 rounded-full uppercase tracking-wider">Health</span>
+              <h2 id="modal-title-header" class="font-display font-extrabold text-2xl sm:text-3xl tracking-tight leading-tight">Sleep Optimization Science</h2>
+            </div>
+          </div>
+
+          <!-- Modal main body scroll area -->
+          <div class="bg-white px-6 py-6 space-y-4">
+            <div class="flex justify-between items-center text-xs text-gray-400 border-b border-gray-100 pb-3">
+              <span class="flex items-center gap-1"><i data-lucide="user" class="w-3.5 h-3.5"></i> OptiLife Science Panel</span>
+              <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> <span id="modal-read-time">5 min read</span></span>
+            </div>
+
+            <!-- Scrollable Rich Text Body -->
+            <div id="modal-composite-text" class="text-slate-dark text-sm leading-relaxed space-y-4 max-h-96 overflow-y-auto">
+              <!-- Dynamically mapped markup block -->
+            </div>
+          </div>
+
+          <!-- Bottom Footer trigger block inside modal -->
+          <div class="bg-gray-50 px-6 py-4 flex justify-between items-center border-t border-gray-100">
+            <p class="text-[11px] text-gray-500">This content is non-sponsored, verified peer-reviewed analysis.</p>
+            <button onclick="toggleArticleModal(false)" class="bg-slate-dark text-white text-xs font-bold py-2 px-5 rounded-lg hover:bg-slate-700 active:scale-95 transition-all">
+              Done Reading
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- CUSTOM NEWSLETTER SUCCESS DIALOG OVERLAY -->
+    <div id="success-dialog" class="hidden fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true">
+      <div class="flex items-center justify-center min-h-screen p-4 text-center">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity" onclick="toggleSuccessDialog(false)"></div>
+        
+        <!-- Dialog box -->
+        <div class="inline-block bg-white rounded-2xl p-6 shadow-2xl transform transition-all max-w-sm w-full border border-gray-100 space-y-4 relative">
+          <div class="mx-auto bg-teal-light/50 w-12 h-12 rounded-full flex items-center justify-center text-teal-primary">
+            <i data-lucide="sparkles" class="w-6 h-6 animate-pulse"></i>
+          </div>
+          <div class="text-center space-y-2">
+            <h3 class="font-display font-bold text-xl text-slate-dark">Thank you for subscribing!</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">
+              We have stored your registration email locally in your browser cookie session memory. Prepare to optimize!
+            </p>
+          </div>
+          <button onclick="toggleSuccessDialog(false)" class="w-full bg-teal-primary text-white text-xs font-bold py-2.5 rounded-xl hover:bg-teal-dark transition-all">
+            Unlock Full Optimization
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- INTERACTIVE JAVASCRIPT STATE ENGINE           -->
+    <!-- ============================================== -->
+    <script>
+      // ----------------------------------------------------
+      // GLOBAL APPLICATION STATE
+      // ----------------------------------------------------
+      const state = {
+        currentView: 'health',
+        habits: [true, false, false, false], // Checked state for 4 habit options
+        // Calculator State
+        calculator: {
+          target: 10000,
+          contribution: 500,
+          rate: 4.5
+        },
+        // Family Calendar State
+        calendar: {
+          selectedDayIndex: 0, // Mon: 0, Tue: 1, ... Sun: 6
+          days: [
+            { name: 'Mon', num: 12, events: [{ title: 'Circuits Training Lesson', time: '4:00 PM - 5:30 PM', cat: 'teal' }] },
+            { name: 'Tue', num: 13, events: [] },
+            { name: 'Wed', num: 14, events: [{ title: 'Dentist Health Check', time: '2:00 PM - 3:00 PM', cat: 'coral' }] },
+            { name: 'Thu', num: 15, events: [] },
+            { name: 'Fri', num: 16, events: [{ title: 'Family Movie & Popcorn', time: '7:00 PM - 9:00 PM', cat: 'slate' }] },
+            { name: 'Sat', num: 17, events: [] },
+            { name: 'Sun', num: 18, events: [{ title: 'Weekly Brunch Picnic', time: '11:00 AM - 1:00 PM', cat: 'coral' }] }
+          ]
+        }
+      };
+
+      // ----------------------------------------------------
+      // HIGH-FIDELITY BLOG ARTICLES REPOSITORY
+      // ----------------------------------------------------
+      const database = {
+        health: [
+          {
+            id: 'h1',
+            category: 'REST & RECOVERY',
+            title: 'Sleep Optimization Cycle Plan',
+            excerpt: 'How deep delta-wave cycles and environmental cooling target peak cognitive clarity.',
+            img: 'https://images.unsplash.com/photo-1511295742364-92767fa62d9f?auto=format&fit=crop&w=400&q=80',
+            readTime: '6 min read',
+            content: `
+              <p>Achieving deep, restorative sleep is the single highest leverage biological intervention in personal wellness. Traditional sleep guides often suggest focus on duration (the standard 8 hours), but modern polysomnography proves that <strong>sleep architecture</strong>—the precise sequencing of light, REM, and deep delta sleep—is far more critical.</p>
+              <h4 class="font-bold text-slate-dark text-sm mt-3">1. Calibrating Environmental Temperature</h4>
+              <p>Your core body temperature must drop by approximately 2°F to trigger deep chemical pathways. Certified sleep researchers recommend targeting a bedroom temperature between <strong>65°F and 68°F</strong>. Higher temperatures result in micro-arousals during REM cycles, disrupting synaptic pruning.</p>
+              <h4 class="font-bold text-slate-dark text-sm mt-3">2. Light Interventions</h4>
+              <p>Melatonin suppression begins with as little as 100 lux of blue-shifted light. Ensure all digital displays are terminated 90 minutes before bedtime. In contrast, log 10 minutes of direct sunlight viewing within an hour of waking to phase-align your circadian pacemaker.</p>
+            `
+          },
+          {
+            id: 'h2',
+            category: 'NUTRITION & ENERGY',
+            title: 'The Blueprint for Intuitive Eating',
+            excerpt: 'Moving past toxic restriction routines to connect with core metabolic signals.',
+            img: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=400&q=80',
+            readTime: '5 min read',
+            content: `
+              <p>Intuitive eating represents a complete paradigm shift from transactional calorie-counting formulas toward dynamic somatic validation. Rather than outsourcing raw sustenance targets to automated online software, clinical dietary boards suggest honing internal hunger cues.</p>
+              <h4 class="font-bold text-slate-dark text-sm mt-3">1. Rejecting the Dictatorship of Deprivation</h4>
+              <p>Strict structural suppression triggers a rebound stress loop, raising baseline cortisol. When chronic stress rises, the brain signals primary adipose tissue accumulation. Permit yourself food with radical self-respect, keeping portion clarity intact.</p>
+              <h4 class="font-bold text-slate-dark text-sm mt-3">2. Calibrating Satiety on the 1-10 Slider</h4>
+              <p>Evaluate your hunger level before starting a meal. Target eating when you reach Level 3 (moderately hungry) and signal stopping when reaching Level 7 (comfortable and vital, without feeling physically bloated or lethargic).</p>
+            `
+          },
+          {
+            id: 'h3',
+            category: 'MINDFULNESS PROCESS',
+            title: 'Daily Breathwork Architectures',
+            excerpt: 'How targeted carbon dioxide tolerances quiet the autonomic amygdala loop.',
+            img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=400&q=80',
+            readTime: '4 min read',
+            content: `
+              <p>When mental stress peaks, your autonomic breathing shifts toward rapid thoracic cycles. This dynamic causes high carbonic expulsion, prompting vascular restriction inside local cerebral capillaries. Use controlled respiration targets to adjust this balance.</p>
+              <h4 class="font-bold text-slate-dark text-sm mt-3">1. The Biological Sigh Anchor</h4>
+              <p>Made popular by neuromuscular specialists, the physiological sigh is the fastest autonomous somatic regulator. Take a double sharp nasal inhale followed immediately by a long, slow exhale via completely parted lips. Repeat 3 times to immediately calm active heart rate levels.</p>
+              <h4 class="font-bold text-slate-dark text-sm mt-3">2. 4-4-4-4 Box Breathing Method</h4>
+              <p>Inhale for 4 seconds, pause fully on a full lung space for 4 seconds, empty the lungs for 4 seconds, and pause empty for 4 seconds. This equalized rhythm restores biological coherence and optimizes heart-rate variability indicators.</p>
+            `
+          }
+        ],
+        finance: [
+          {
+            id: 'f1',
+            category: 'SAVINGS & CASH FLOWS',
+            title: 'High-Yield Compound Vehicles Explained',
+            excerpt: 'traditional bank accounts dilute purchasing power. Explore high-yield reserves to preserve risk-free capital asset pools.',
+            img: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=400&q=80',
+            readTime: '8 min read',
+            content: `
+              <p>Most commercial bank operations pay a nominal APY rate of roughly 0.01%. In current inflationary environments, maintaining large emergency capital inside traditional branches directly dilutes capital purchasing weight. High-Yield Savings Accounts (HYSA) change this transaction.</p>
+              <h4 class="font-bold text-slate-dark text-sm mt-3">1. Yield Compound Multipliers</h4>
+              <p>A typical certified HYSA maintains yield outcomes of 4.25% to 5.00% APY. A reserve balance of $25,000 inside traditional institutions yields pennies, whereas high-yield structures compound this same asset pool to produce approximately $1,250 of interest annually with zero additional financial risk.</p>
+              <h4 class="font-bold text-slate-dark text-sm mt-3">2. Preservation of Capital Liquidity</h4>
+              <p>Unlike Certificate of Deposit terms, a HYSA lets users withdraw emergency reserve assets immediately. This provides vital downside protection while enjoying interest payouts computed daily.</p>
+            `
+          },
+          {
+            id: 'f2',
+            category: 'LAZY WEALTH SYSTEM',
+            title: 'Index Fund Foundations: Consistent Passive Paths',
+            excerpt: 'Ditch active stocks speculation stress. How holding diversified S&P 500 equity models compounds generational wellness.',
+            img: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=400&q=80',
+            readTime: '10 min read',
+            content: `
+              <p>Active day trading consistently underperforms average passive equity holdings. Research proves that 92% of premium Wall Street investment funds fail to match basic market baseline indexes over 15-year stretches. The answer? Embrace passive target diversification.</p>
+              <h4 class="font-bold text-slate-dark text-sm mt-3">1. The Simplicity of Broad Indexes</h4>
+              <p>An index fund (such as the VOO or VTI ETF) purchases tiny fractions of every premium standard company simultaneously. This diversification offsets single-brand catastrophic losses. Generational growth trends historically yield an annualized track of 8% to 10%.</p>
+              <h4 class="font-bold text-slate-dark text-sm mt-3">2. Passive Reinvesting (DRIP tracking)</h4>
+              <p>Always turn on your brokerage's Dividend Reinvestment Plan (DRIP). This workflow uses quarterly payouts to immediately buy additional index units, compounding total asset weights exponentially.</p>
+            `
+          },
+          {
+            id: 'f3',
+            category: 'ZERO-BASED BUDGETS',
+            title: 'Structuring the Zero-Based Budget Blueprint',
+            excerpt: 'Assign every incoming dollar a dedicated utility target to clear numerical friction.',
+            img: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=400&q=80',
+            readTime: '6 min read',
+            content: `
+              <p>Zero-based budgeting is not a restrictive regimen of financial deprivation. Rather, it is a method of conscious direction. By budgeting with high intentionality, you eliminate the cognitive burden of unknown leakages.</p>
+              <h4 class="font-bold text-slate-dark text-sm mt-3">1. The Basic Equation: Income - Allocation = 0</h4>
+              <p>Every dollar that enters your household accounts must find a destination on paper. If your net monthly intake is $5,000, assign all $5,000 immediately: Rent, Food, Utilities, Index investing, and emergency reserves. No dollar should remain "unassigned."</p>
+              <h4 class="font-bold text-slate-dark text-sm mt-3">2. Automating the Transfers</h4>
+              <p>Remove human decision-friction from your saving habits. Configure your paycheck options to automatically funnel targeted investments into high-yield reserves first, prior to discretionary spending.</p>
+            `
+          }
+        ],
+        family: [
+          {
+            id: 'fam1',
+            category: 'HYBRID WORKPLACE',
+            title: 'Parenting Behind the WFH Screen Divide',
+            excerpt: 'How physical prompts and dedicated timezone boundaries protect family presence.',
+            img: 'https://images.unsplash.com/photo-1484981138541-3d074aa97716?auto=format&fit=crop&w=400&q=80',
+            readTime: '7 min read',
+            content: `
+              <p>Remote workplace flexibility has removed physical barriers between occupational targets and family commitments. Without clear strategies, parents run the risk of sliding into chronic situational distraction—being physically present but mentally unavailable.</p>
+              <h4 class="font-bold text-slate-dark text-sm mt-3">1. Physical Border Prompts</h4>
+              <p>Implement simple, visual environmental signals that children can immediately recognize. For example, a small glowing leaf light on your office door handles: when lit green, open conversations are welcome; when yellow, knock before entry; when red, active professional presentations are in play.</p>
+              <h4 class="font-bold text-slate-dark text-sm mt-3">2. The 5:30 transitioning ritual</h4>
+              <p>Do not simply walk from your desk directly into active family spaces with your mind still racing. Take 10 minutes of quiet solitude or stretching to consciously transition out of work mode before entering family spaces.</p>
+            `
+          },
+          {
+            id: 'fam2',
+            category: 'EMOTIONAL BONDS',
+            title: 'Raising Resilient and Articulate Kids',
+            excerpt: 'Active dialogue structures that promote emotional validation and solid family boundaries.',
+            img: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=400&q=80',
+            readTime: '6 min read',
+            content: `
+              <p>Emotional stability is learned in childhood through co-regulation with caregivers. Children do not require flawless parenting; they need emotional attunement and consistent, safe boundaries.</p>
+              <h4 class="font-bold text-slate-dark text-sm mt-3">1. Active Emotion Identification</h4>
+              <p>When tantrums occur, avoid aggressive suppression or dismissal. Instead, validate the child's underlying feelings. Try using clear affirmation loops: "I see you are upset because of this change, and it is okay to feel that way. Let's work through it together."</p>
+              <h4 class="font-bold text-slate-dark text-sm mt-3">2. Weekly Circle check-ins</h4>
+              <p>Establish a weekly family meeting routine, perhaps during Sunday brunch. Encourage each family member to share their highlight of the week, area of friction, and a dynamic goal for the upcoming week.</p>
+            `
+          },
+          {
+            id: 'fam3',
+            category: 'MUTUAl COOPERATION',
+            title: 'Screentime Architecture for Modern Households',
+            excerpt: 'Create collaborative technology structures without generating continuous conflict patterns.',
+            img: 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=400&q=80',
+            readTime: '5 min read',
+            content: `
+              <p>Simply hiding screens or using unilateral locks often backfires, fostering high friction and evasion. Creating collaborative technology boundaries is a more sustainable approach.</p>
+              <h4 class="font-bold text-slate-dark text-sm mt-3">1. Establishing Device-Free Tech Zones</h4>
+              <p>Mark high-value social boundaries as screen-free zones inside the home. The family dining table, bedrooms after 8 PM, and active weekend picnics are the easiest targets to promote eye contact and organic conversation.</p>
+              <h4 class="font-bold text-slate-dark text-sm mt-3">2. Cooperative Tech Allocation</h4>
+              <p>Instead of passive screen consumption, redirect digital usage toward active learning. Focus screen schedules on educational content editing, game design, and exploring interactive world geography together.</p>
+            `
+          }
+        ]
+      };
+
+      // ----------------------------------------------------
+      // PAGE NAVIGATION SYSTEM (SPA routing)
+      // ----------------------------------------------------
+      function navigateTo(viewId) {
+        state.currentView = viewId;
+        
+        // Toggle view container visibilities
+        document.querySelectorAll('.view-section').forEach(section => {
+          if (section.id === `view-${viewId}`) {
+            section.classList.remove('hidden');
+            setTimeout(() => {
+              section.classList.add('opacity-100');
+              section.classList.remove('opacity-0');
+            }, 10);
+          } else {
+            section.classList.add('opacity-0');
+            section.classList.remove('opacity-100');
+            section.classList.add('hidden');
+          }
+        });
+
+        // Toggle nav tab active styling states
+        const tabs = ['health', 'finance', 'family'];
+        tabs.forEach(tab => {
+          const tabBtn = document.getElementById(`nav-tab-${tab}`);
+          if (tab === viewId) {
+            tabBtn.className = "px-4 py-2 hover:bg-gray-50 text-teal-primary font-bold border-b-2 border-teal-primary rounded-t-lg transition-all duration-200 cursor-pointer active:scale-95";
+          } else {
+            tabBtn.className = "px-4 py-2 text-gray-500 font-medium hover:text-slate-dark hover:bg-gray-50 border-b-2 border-transparent rounded-t-lg transition-all duration-200 cursor-pointer active:scale-95";
+          }
+        });
+
+        // Reset scroll position gracefully
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        const burgerIcon = document.getElementById('menu-icon-burger');
+        const closeIcon = document.getElementById('menu-icon-close');
+
+        if (menu.classList.contains('hidden')) {
+          menu.classList.remove('hidden');
+          burgerIcon.classList.add('hidden');
+          closeIcon.classList.remove('hidden');
+        } else {
+          menu.classList.add('hidden');
+          burgerIcon.classList.remove('hidden');
+          closeIcon.classList.add('hidden');
+        }
+      }
+
+      function smoothScrollTo(elementId) {
+        const element = document.getElementById(elementId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+
+      // ----------------------------------------------------
+      // PAGE 1: DYNAMIC HABIT TRACKER INTERACTIVITY
+      // ----------------------------------------------------
+      function recalculateHabits() {
+        const container = document.getElementById('habit-checkboxes-container');
+        const inputs = container.querySelectorAll('input[type="checkbox"]');
+        
+        let checkedCount = 0;
+        inputs.forEach((input, idx) => {
+          state.habits[idx] = input.checked;
+          if (input.checked) {
+            checkedCount++;
+            // Apply checked strikethrough style
+            input.nextElementSibling.classList.add('line-through', 'text-on-surface-variant/70');
+          } else {
+            input.nextElementSibling.classList.remove('line-through', 'text-on-surface-variant/70');
+          }
+        });
+
+        const totalHabits = inputs.length;
+        const percentage = Math.round((checkedCount / totalHabits) * 100);
+
+        // Update progress UI
+        document.getElementById('tracker-percentage').textContent = `${percentage}%`;
+        
+        // Adjust the SVG ring path dashoffset to animate progress
+        const circle = document.getElementById('habit-svg-circle');
+        const strokeOffset = 100 - percentage;
+        circle.style.strokeDashoffset = strokeOffset;
+
+        // Custom contextual headlines based on progress
+        const headlineMsg = document.getElementById('tracker-headline-msg');
+        if (percentage === 0) {
+          headlineMsg.textContent = "Take the first step!";
+        } else if (percentage < 50) {
+          headlineMsg.textContent = "Compounding habits active!";
+        } else if (percentage < 100) {
+          headlineMsg.textContent = "Sustaining alignment!";
+        } else {
+          headlineMsg.textContent = "Peak lifestyle unlocked!";
+        }
+
+        // Keep synced on global navigation bar counter
+        document.getElementById('global-counter-num').textContent = checkedCount;
+
+        // Write state to LocalStorage for offline resilience
+        localStorage.setItem('optilife_habits', JSON.stringify(state.habits));
+      }
+
+      function loadStoredHabits() {
+        const stored = localStorage.getItem('optilife_habits');
+        if (stored) {
+          state.habits = JSON.parse(stored);
+        }
+        const container = document.getElementById('habit-checkboxes-container');
+        const inputs = container.querySelectorAll('input[type="checkbox"]');
+        inputs.forEach((input, idx) => {
+          input.checked = !!state.habits[idx];
+        });
+        recalculateHabits();
+      }
+
+      // ----------------------------------------------------
+      // PAGE 2: SAVINGS GOAL CALCULATOR ENGINE
+      // ----------------------------------------------------
+      function calculateSavingsGoal() {
+        const target = parseFloat(document.getElementById('calc-target').value) || 0;
+        const contribution = parseFloat(document.getElementById('calc-contribution').value) || 0;
+        const rateDecimal = parseFloat(document.getElementById('calc-rate').value) / 100 / 12 || 0; // monthly rate
+
+        // Display text outputs of sliders dynamically
+        document.getElementById('slider-contrib-label').textContent = `$${contribution.toLocaleString()}/mo`;
+        document.getElementById('slider-rate-label').textContent = `${(rateDecimal * 12 * 100).toFixed(2)}%`;
+
+        const displayDuration = document.getElementById('calc-duration-result');
+        const displayInterest = document.getElementById('calc-interest-earned');
+        const summaryPrincipal = document.getElementById('summary-principal');
+        const summaryYield = document.getElementById('summary-yield');
+        const summaryTotal = document.getElementById('summary-total');
+
+        if (target <= 0 || contribution <= 0) {
+          displayDuration.textContent = '0 Months';
+          displayInterest.textContent = 'Please enter high-value targets';
+          return;
+        }
+
+        let months = 0;
+        let cumulativeSaved = 0;
+        let interestGained = 0;
+
+        // Loop calculating month-by-month compounding to model exactly what happens
+        while (cumulativeSaved < target && months < 360) { // Limit to 30 years maximum for safety
+          months++;
+          // First compound the current pool
+          const currentInterest = cumulativeSaved * rateDecimal;
+          interestGained += currentInterest;
+          cumulativeSaved += currentInterest;
+          // Then add monthly contribution
+          cumulativeSaved += contribution;
+        }
+
+        const principalTotal = contribution * months;
+
+        // Render updates
+        if (months >= 360) {
+          displayDuration.textContent = '30+ Years';
+          displayInterest.textContent = 'Target is too high for contribution level.';
+        } else {
+          displayDuration.textContent = `${months} ${months === 1 ? 'Month' : 'Months'}`;
+          const yearsFraction = (months / 12).toFixed(1);
+          displayInterest.textContent = `Approximately ${yearsFraction} years to complete`;
+        }
+
+        summaryPrincipal.textContent = `$${Math.round(principalTotal).toLocaleString()}`;
+        summaryYield.textContent = `$${Math.round(interestGained).toLocaleString()}`;
+        summaryTotal.textContent = `$${Math.round(cumulativeSaved).toLocaleString()}`;
+      }
+
+      // Wire up calculator listeners
+      function initCalculator() {
+        const targetInput = document.getElementById('calc-target');
+        const contribSlider = document.getElementById('calc-contribution');
+        const rateSlider = document.getElementById('calc-rate');
+
+        targetInput.addEventListener('input', () => {
+          // Keep input constraints safe but reactive
+          if (targetInput.value > 1000000) targetInput.value = 1000000;
+          calculateSavingsGoal();
+        });
+        contribSlider.addEventListener('input', calculateSavingsGoal);
+        rateSlider.addEventListener('input', calculateSavingsGoal);
+
+        calculateSavingsGoal();
+      }
+
+      // ----------------------------------------------------
+      // PAGE 3: FAMILY CALENDAR SCHEDULIER
+      // ----------------------------------------------------
+      function renderCalendarStrip() {
+        const strip = document.getElementById('calendar-days-strip');
+        strip.innerHTML = '';
+
+        state.calendar.days.forEach((day, index) => {
+          const isActive = index === state.calendar.selectedDayIndex;
+          const isOccupied = day.events.length > 0;
+
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.onclick = () => selectCalendarDay(index);
+          btn.className = `flex flex-col items-center py-2 px-1 rounded-xl transition-all border duration-200 cursor-pointer ${
+            isActive 
+              ? 'bg-teal-primary border-teal-primary text-white shadow-sm scale-105' 
+              : 'bg-gray-50 border-gray-100 text-gray-500 hover:bg-gray-100 hover:text-slate-dark'
+          }`;
+
+          btn.innerHTML = `
+            <span class="text-[10px] uppercase font-bold tracking-wider opacity-80">${day.name}</span>
+            <span class="text-base font-extrabold mt-1 font-display">${day.num}</span>
+            ${isOccupied ? `<span class="w-1.5 h-1.5 ${isActive ? 'bg-white' : 'bg-coral'} rounded-full mt-1.5 animate-pulse"></span>` : ''}
+          `;
+
+          strip.appendChild(btn);
+        });
+
+        renderSelectedDayAgenda();
+      }
+
+      function selectCalendarDay(idx) {
+        state.calendar.selectedDayIndex = idx;
+        renderCalendarStrip();
+      }
+
+      function renderSelectedDayAgenda() {
+        const agendaBox = document.getElementById('calendar-day-agenda-box');
+        const day = state.calendar.days[state.calendar.selectedDayIndex];
+        
+        agendaBox.innerHTML = '';
+
+        const heading = document.createElement('div');
+        heading.className = 'border-b border-gray-200/55 pb-2 mb-2 flex justify-between items-center';
+        heading.innerHTML = `
+          <h4 class="text-xs font-extrabold text-slate-dark uppercase">${day.name} Day Agenda</h4>
+          <span class="text-[10px] bg-white text-gray-400 py-0.5 px-2 rounded-full border border-gray-100">${day.events.length} Scheduled</span>
+        `;
+        agendaBox.appendChild(heading);
+
+        if (day.events.length === 0) {
+          const p = document.createElement('p');
+          p.className = 'text-xs text-gray-400 italic text-center py-4';
+          p.textContent = 'No family events scheduled. Perfect for spontaneous offline play!';
+          agendaBox.appendChild(p);
+          return;
+        }
+
+        day.events.forEach((val) => {
+          let themeClasses = '';
+          if (val.cat === 'teal') {
+            themeClasses = 'bg-teal-light/50 border-teal-primary text-teal-dark';
+          } else if (val.cat === 'coral') {
+            themeClasses = 'bg-red-50 border-coral text-red-700';
+          } else {
+            themeClasses = 'bg-gray-100 border-slate-700 text-slate-900';
+          }
+
+          const card = document.createElement('div');
+          card.className = `p-3 rounded-xl border-l-4 shadow-sm space-y-1 ${themeClasses}`;
+          card.innerHTML = `
+            <h5 class="text-xs font-extrabold">${val.title}</h5>
+            <p class="text-[11px] opacity-80 flex items-center gap-1">
+              <i data-lucide="clock" class="w-3 h-3"></i> ${val.time}
+            </p>
+          `;
+          agendaBox.appendChild(card);
+        });
+
+        lucide.createIcons();
+      }
+
+      function addFamilyEvent() {
+        const titleInput = document.getElementById('event-title');
+        const categoryInput = document.getElementById('event-category');
+        const timeInput = document.getElementById('event-time');
+
+        const title = titleInput.value.trim();
+        const cat = categoryInput.value;
+        const time = timeInput.value.trim();
+
+        if (!title || !time) {
+          alert('Please fill out the Event Title and Time properties.');
+          return;
+        }
+
+        const activeDay = state.calendar.days[state.calendar.selectedDayIndex];
+        activeDay.events.push({ title, time, cat });
+
+        // Reset inputs
+        titleInput.value = '';
+        timeInput.value = '';
+
+        // Rerender layout
+        renderCalendarStrip();
+      }
+
+      function scrollCarousel(direction) {
+        const carousel = document.getElementById('activities-carousel');
+        const scrollAmount = 300;
+        carousel.scrollBy({
+          left: direction * scrollAmount,
+          behavior: 'smooth'
+        });
+      }
+
+      // ----------------------------------------------------
+      // NEWSLETTER SUBSCRIPTION & SUCCESS ANCHOR
+      // ----------------------------------------------------
+      function handleNewsletterSubmit(e) {
+        e.preventDefault();
+        const emailInput = document.getElementById('newsletter-email');
+        const email = emailInput.value.trim();
+        
+        if (email) {
+          // Simulate offline memory storage
+          localStorage.setItem('optilife_subscribed_email', email);
+          emailInput.value = '';
+          // Show slide modal feedback layout instead of default native popups
+          toggleSuccessDialog(true);
+        }
+      }
+
+      function toggleSuccessDialog(show) {
+        const dialog = document.getElementById('success-dialog');
+        if (show) {
+          dialog.classList.remove('hidden');
+        } else {
+          dialog.classList.add('hidden');
+        }
+      }
+
+      // ----------------------------------------------------
+      // ARTICLE CONTENT & MODAL CONTROLLER
+      // ----------------------------------------------------
+      function renderBlogPosts() {
+        const healthGrid = document.getElementById('health-posts-target-grid');
+        const financeList = document.getElementById('finance-posts-target-list');
+        const familyList = document.getElementById('family-posts-target-list');
+
+        // Page 1: Health Cards Rendering
+        healthGrid.innerHTML = '';
+        database.health.forEach(post => {
+          const card = document.createElement('div');
+          card.className = "bg-white rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col group";
+          card.innerHTML = `
+            <div class="h-44 w-full bg-gray-50 overflow-hidden relative">
+              <img src="${post.img}" alt="${post.title}" class="h-full w-full object-cover group-hover:scale-[1.03] transition-transform duration-500" />
+              <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/20 to-transparent"></div>
+              <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-teal-dark text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">${post.category}</span>
+            </div>
+            <div class="p-5 flex flex-col flex-grow space-y-3">
+              <h4 class="font-display font-bold text-lg text-slate-dark leading-snug group-hover:text-teal-primary transition-colors">${post.title}</h4>
+              <p class="text-xs text-gray-500 line-clamp-3 leading-relaxed flex-grow">${post.excerpt}</p>
+              <div class="pt-2 flex justify-between items-center text-xs text-gray-400">
+                <span>${post.readTime}</span>
+                <button onclick="openModal('${post.id}', 'health')" class="text-teal-primary font-bold hover:text-teal-dark flex items-center gap-1.5 focus:outline-none cursor-pointer">
+                  Read More <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          `;
+          healthGrid.appendChild(card);
+        });
+
+        // Page 2: Finance Vertical Cards Layout
+        financeList.innerHTML = '';
+        database.finance.forEach(post => {
+          const card = document.createElement('div');
+          card.className = "bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-gray-200 p-5 flex flex-col sm:flex-row gap-6 hover:shadow-md transition-all duration-300 group";
+          card.innerHTML = `
+            <div class="sm:w-1/3 h-40 shrink-0 bg-gray-50 rounded-xl overflow-hidden relative">
+              <img src="${post.img}" alt="${post.title}" class="h-full w-full object-cover group-hover:scale-102 transition-transform duration-500" />
+              <span class="absolute top-3 left-3 bg-white/95 text-teal-dark text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">${post.category}</span>
+            </div>
+            <div class="sm:w-2/3 flex flex-col justify-between space-y-3 sm:space-y-0">
+              <div class="space-y-2">
+                <h4 class="font-display font-bold text-xl text-slate-dark group-hover:text-teal-primary transition-colors leading-snug">${post.title}</h4>
+                <p class="text-xs text-gray-500 leading-relaxed line-clamp-3">${post.excerpt}</p>
+              </div>
+              <div class="flex justify-between items-center text-xs text-gray-400 pt-2 border-t border-gray-50">
+                <span>${post.readTime}</span>
+                <button onclick="openModal('${post.id}', 'finance')" class="text-teal-primary font-bold hover:text-teal-dark flex items-center gap-1.5 focus:outline-none cursor-pointer">
+                  Analyse Article <i data-lucide="line-chart" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          `;
+          financeList.appendChild(card);
+        });
+
+        // Page 3: Family Feed List Layout
+        familyList.innerHTML = '';
+        database.family.forEach(post => {
+          const card = document.createElement('div');
+          card.className = "bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-gray-200 p-5 flex flex-col sm:flex-row gap-6 hover:shadow-md transition-all duration-300 group";
+          card.innerHTML = `
+            <div class="sm:w-1/3 h-40 shrink-0 bg-gray-50 rounded-xl overflow-hidden relative">
+              <img src="${post.img}" alt="${post.title}" class="h-full w-full object-cover group-hover:scale-102 transition-transform duration-500" />
+              <span class="absolute top-3 left-3 bg-white/95 text-teal-dark text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">${post.category}</span>
+            </div>
+            <div class="sm:w-2/3 flex flex-col justify-between space-y-3 sm:space-y-0">
+              <div class="space-y-2">
+                <h4 class="font-display font-bold text-xl text-slate-dark group-hover:text-teal-primary transition-colors leading-snug">${post.title}</h4>
+                <p class="text-xs text-gray-500 leading-relaxed line-clamp-3">${post.excerpt}</p>
+              </div>
+              <div class="flex justify-between items-center text-xs text-gray-400 pt-2 border-t border-gray-50">
+                <span>${post.readTime}</span>
+                <button onclick="openModal('${post.id}', 'family')" class="text-teal-primary font-bold hover:text-teal-dark flex items-center gap-1.5 focus:outline-none cursor-pointer">
+                  Co-Read Guide <i data-lucide="book-open" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          `;
+          familyList.appendChild(card);
+        });
+
+        lucide.createIcons();
+      }
+
+      function openModal(postId, category) {
+        const dataset = database[category];
+        const post = dataset.find(item => item.id === postId);
+        
+        if (post) {
+          document.getElementById('modal-img').src = post.img + '?q=100';
+          document.getElementById('modal-tag-chip').textContent = post.category;
+          document.getElementById('modal-title-header').textContent = post.title;
+          document.getElementById('modal-read-time').textContent = post.readTime;
+          document.getElementById('modal-composite-text').innerHTML = post.content;
+          
+          toggleArticleModal(true);
+        }
+      }
+
+      function toggleArticleModal(show) {
+        const modal = document.getElementById('article-modal');
+        if (show) {
+          modal.classList.remove('hidden');
+          document.body.style.overflow = 'hidden'; // prevent double page scrolling
+        } else {
+          modal.classList.add('hidden');
+          document.body.style.overflow = '';
+        }
+      }
+
+      // Event listener for Esc Key closures close the modal automatically
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          toggleArticleModal(false);
+          toggleSuccessDialog(false);
+        }
+      });
+
+      // ----------------------------------------------------
+      // PAGE INITIATOR ROOT LOAD
+      // ----------------------------------------------------
+      window.addEventListener('DOMContentLoaded', () => {
+        // Render vectors first
+        lucide.createIcons();
+
+        // Populate posts target panels
+        renderBlogPosts();
+
+        // Hydrate habit checkbox elements
+        loadStoredHabits();
+
+        // Boot savings engines slider limits
+        initCalculator();
+
+        // Populate parenting agenda strip
+        renderCalendarStrip();
+      });
+    </script>
+  </body>
+</html>
